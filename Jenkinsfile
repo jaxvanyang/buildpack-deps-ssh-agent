@@ -20,6 +20,7 @@ pipeline {
 				-v docker-volume-for-amd64-sid-agent:/home/jenkins/agent:rw \
 				-p 2200:22 \
 				--name amd64-sid-agent --restart on-failure:5 \
+				buildpack-deps-ssh-agent:sid \
 				"${JENKINS_AGENT_SSH_PUBKEY}"
 				'''
 			}
