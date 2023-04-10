@@ -32,6 +32,11 @@ RUN groupadd -g ${gid} ${group} \
     # Make sure that user 'jenkins' own these directories and their content
     && chown -R "${uid}":"${gid}" "${JENKINS_AGENT_HOME}" "${AGENT_WORKDIR}"
 
+# Use mirror to speed up apt
+RUN sed \
+		-i 's#http://deb.debian.org/debian#http://mirrors.tuna.tsinghua.edu.cn/debian#' \
+		/etc/apt/sources.list.d/debian.sources
+
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
        git-lfs \
