@@ -27,7 +27,7 @@ pipeline {
 		}
 		stage('Test amd64-sid-agent') {
 			steps {
-				sh 'ssh -p 2200 jenkins@localhost uname -a'
+				sh 'docker exec amd64-sid-agent uname -a'
 			}
 		}
 	}
