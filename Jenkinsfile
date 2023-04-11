@@ -9,19 +9,29 @@ pipeline {
 				sh 'make clean'
 			}
 		}
-		stage('Build amd64-sid') {
-			steps {
-				sh 'make amd64-sid'
+		stage('Matrix') {
+			axes {
+				axis {
+					name 'TAG'
+					values 'amd64-sid', 'riscv64-sid'
+				}
 			}
-		}
-		stage('Deploy amd64-sid-agent') {
-			steps {
-				sh 'make amd64-sid-agent'
-			}
-		}
-		stage('Test amd64-sid-agent') {
-			steps {
-				sh 'docker exec amd64-sid-agent uname -a'
+			stages {
+				stage('Build ${TAG}') {
+					steps {
+						sh 'make ${TAG}'
+					}
+				}
+				stage('Deploy ${TAG}-agent') {
+					steps {
+						sh 'make ${TAG}-agent'
+					}
+				}
+				stage('Test ${TAG}-agent') {
+					steps {
+						sh 'docker exec ${TAG}-agent uname -a'
+					}
+				}
 			}
 		}
 	}
