@@ -36,6 +36,7 @@ RUN groupadd -g ${gid} ${group} \
 RUN <<EOF cat > /etc/apt/sources.list
 deb http://mirrors.tuna.tsinghua.edu.cn/debian/ sid main
 EOF
+RUN rm -f /etc/apt/sources.list.d/debian.sources
 
 RUN apt-get update \
     && apt-get install --no-install-recommends -y \
