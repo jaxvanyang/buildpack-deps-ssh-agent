@@ -17,7 +17,7 @@ docker_run = docker run -d \
 						 "${NAME}:$(3)" \
 						 "$${JENKINS_AGENT_SSH_PUBKEY}"
 
-.PHONY: build stop clean
+.PHONY: build test stop clean-agents clean
 .PHONY: ${IMAGES} ${AGENTS}
 
 build: ${IMAGES}
@@ -33,6 +33,8 @@ riscv64-sid: riscv64/sid/Dockerfile ${COMMON_DEPS}
 
 riscv64-sid-agent:
 	$(call docker_run,$@,2201,sid-riscv64)
+
+test: clean-agents ${AGENTS}
 
 stop:
 	-docker stop ${AGENTS}
