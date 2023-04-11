@@ -10,26 +10,28 @@ pipeline {
 			}
 		}
 		stage('Matrix') {
-			axes {
-				axis {
-					name 'TAG'
-					values 'amd64-sid', 'riscv64-sid'
-				}
-			}
-			stages {
-				stage('Build ${TAG}') {
-					steps {
-						sh 'make ${TAG}'
+			matrix {
+				axes {
+					axis {
+						name 'TAG'
+						values 'amd64-sid', 'riscv64-sid'
 					}
 				}
-				stage('Deploy ${TAG}-agent') {
-					steps {
-						sh 'make ${TAG}-agent'
+				stages {
+					stage('Build ${TAG}') {
+						steps {
+							sh 'make ${TAG}'
+						}
 					}
-				}
-				stage('Test ${TAG}-agent') {
-					steps {
-						sh 'docker exec ${TAG}-agent uname -a'
+					stage('Deploy ${TAG}-agent') {
+						steps {
+							sh 'make ${TAG}-agent'
+						}
+					}
+					stage('Test ${TAG}-agent') {
+						steps {
+							sh 'docker exec ${TAG}-agent uname -a'
+						}
 					}
 				}
 			}
