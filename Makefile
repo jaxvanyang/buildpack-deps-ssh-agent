@@ -1,5 +1,5 @@
 NAME := buildpack-deps-ssh-agent
-TAGS := sid
+TAGS := sid-amd64 sid-riscv64
 IMAGES := amd64-sid riscv64-sid
 AGENTS := amd64-sid-agent riscv64-sid-agent
 COMMON_DEPS := setup-sshd
