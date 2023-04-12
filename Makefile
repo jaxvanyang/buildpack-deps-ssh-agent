@@ -15,7 +15,7 @@ docker_run = docker run -d \
 						 -p "$(2):22" \
 						 --name "$(1)" \
 						 --restart on-failure:5 \
-						 "${NAME}:$(3)" \
+						 "${HUB_PREFIX}/${NAME}:$(3)" \
 						 "$${JENKINS_AGENT_SSH_PUBKEY}"
 
 .PHONY: build push pull test stop clean-agents clean
