@@ -1,3 +1,4 @@
+HUB_PREFIX := jaxvanyang
 NAME := buildpack-deps-ssh-agent
 TAGS := sid-amd64 sid-riscv64
 IMAGES := amd64-sid riscv64-sid
@@ -6,7 +7,7 @@ COMMON_DEPS := setup-sshd
 
 ## Macros
 docker_build = cp ${COMMON_DEPS} "$(1)/$(2)" && cd "$(1)/$(2)" && \
-							 docker build -t "${NAME}:$(2)-$(1)" . && \
+							 docker build -t "${HUB_PREFIX}/${NAME}:$(2)-$(1)" . && \
 							 rm ${COMMON_DEPS}
 docker_run = docker run -d \
 						 -v "$(1)-workdir:/home/jenkins/agent:rw" \
@@ -17,7 +18,7 @@ docker_run = docker run -d \
 						 "${NAME}:$(3)" \
 						 "$${JENKINS_AGENT_SSH_PUBKEY}"
 
-.PHONY: build test stop clean-agents clean
+.PHONY: build push test stop clean-agents clean
 .PHONY: ${IMAGES} ${AGENTS}
 
 build: ${IMAGES}
@@ -34,6 +35,9 @@ riscv64-sid: riscv64/sid/Dockerfile ${COMMON_DEPS}
 riscv64-sid-agent:
 	$(call docker_run,$@,2201,sid-riscv64)
 
+push:
+	for tag in ${TAGS}; do docker push "${HUB_PREFIX}/${NAME}:$${tag}"; done
+
 test: clean-agents ${AGENTS}
 
 stop:
@@ -43,4 +47,4 @@ clean-agents: stop
 	-docker rm ${AGENTS}
 
 clean: clean-agents
-	-@for tag in ${TAGS}; do docker rmi "${NAME}:$${tag}"; done
+	-@for tag in ${TAGS}; do docker rmi "${HUB_PREFIX}/${NAME}:$${tag}"; done
