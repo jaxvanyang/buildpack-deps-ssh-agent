@@ -18,7 +18,7 @@ docker_run = docker run -d \
 						 "${NAME}:$(3)" \
 						 "$${JENKINS_AGENT_SSH_PUBKEY}"
 
-.PHONY: build push test stop clean-agents clean
+.PHONY: build push pull test stop clean-agents clean
 .PHONY: ${IMAGES} ${AGENTS}
 
 build: ${IMAGES}
@@ -37,6 +37,9 @@ riscv64-sid-agent:
 
 push:
 	for tag in ${TAGS}; do docker push "${HUB_PREFIX}/${NAME}:$${tag}"; done
+
+pull:
+	for tag in ${TAGS}; do docker pull "${HUB_PREFIX}/${NAME}:$${tag}"; done
 
 test: clean-agents ${AGENTS}
 
