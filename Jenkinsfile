@@ -9,6 +9,11 @@ pipeline {
 				sh 'make clean'
 			}
 		}
+		stage('Pull Images') {
+			steps {
+				sh 'make pull'
+			}
+		}
 		stage('Matrix') {
 			matrix {
 				axes {
@@ -18,17 +23,12 @@ pipeline {
 					}
 				}
 				stages {
-					stage('Build ${TAG}') {
-						steps {
-							sh 'make ${TAG}'
-						}
-					}
-					stage('Deploy ${TAG}-agent') {
+					stage('Deploy ' + env.TAG + '-agent') {
 						steps {
 							sh 'make ${TAG}-agent'
 						}
 					}
-					stage('Test ${TAG}-agent') {
+					stage('Test ' + env.TAG + '-agent') {
 						steps {
 							sh 'docker exec ${TAG}-agent uname -a'
 						}
