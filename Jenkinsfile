@@ -23,13 +23,15 @@ pipeline {
 					}
 				}
 				stages {
-					stage('Deploy ' + env.TAG + '-agent') {
+					stage('Deploy') {
 						steps {
+							echo "Deploy ${TAG}-agent"
 							sh 'make ${TAG}-agent'
 						}
 					}
-					stage('Test ' + env.TAG + '-agent') {
+					stage('Test') {
 						steps {
+							echo "Test ${TAG}-agent"
 							sh 'docker exec ${TAG}-agent uname -a'
 						}
 					}
