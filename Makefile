@@ -11,7 +11,7 @@ docker_build = cp ${COMMON_DEPS} "$(1)/$(2)" && cd "$(1)/$(2)" && \
 							 rm ${COMMON_DEPS}
 docker_run = docker run -d \
 						 -v "$(1)-workdir:/home/jenkins/agent:rw" \
-						 -v "/home/jax/Public/resources:/resources:ro" \
+						 -v "/resources:/resources:ro" \
 						 -p "$(2):22" \
 						 --name "$(1)" \
 						 --restart on-failure:5 \
