@@ -1,6 +1,6 @@
 pipeline {
 	agent {
-		label 'fx50j-arch'
+		label 'built-in'
 	}
 
 	stages {
