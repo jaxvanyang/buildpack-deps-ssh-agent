@@ -14,7 +14,7 @@ docker_run = docker run -d \
 						 -v "/resources:/resources:ro" \
 						 -p "$(2):22" \
 						 --name "$(1)" \
-						 --restart on-failure:5 \
+						 --restart unless-stopped \
 						 "${HUB_PREFIX}/${NAME}:$(3)" \
 						 "$${JENKINS_AGENT_SSH_PUBKEY}"
 
