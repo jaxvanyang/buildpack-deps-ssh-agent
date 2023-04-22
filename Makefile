@@ -1,8 +1,8 @@
 HUB_PREFIX := jaxvanyang
 NAME := buildpack-deps-ssh-agent
-TAGS := sid-amd64 sid-riscv64
-IMAGES := amd64-sid riscv64-sid
-AGENTS := amd64-sid-agent riscv64-sid-agent
+TAGS := sid-amd64 sid-riscv64 sid-arm64v8
+IMAGES := amd64-sid riscv64-sid arm64v8-sid
+AGENTS := amd64-sid-agent riscv64-sid-agent arm64v8-sid-agent
 COMMON_DEPS := setup-sshd
 
 ## Macros
@@ -34,6 +34,12 @@ riscv64-sid: riscv64/sid/Dockerfile ${COMMON_DEPS}
 
 riscv64-sid-agent:
 	$(call docker_run,$@,2201,sid-riscv64)
+
+arm64v8-sid: arm64v8/sid/Dockerfile ${COMMON_DEPS}
+	$(call docker_build,arm64v8,sid)
+
+arm64v8-sid-agent:
+	$(call docker_run,$@,2202,sid-arm64v8)
 
 push:
 	for tag in ${TAGS}; do docker push "${HUB_PREFIX}/${NAME}:$${tag}"; done
