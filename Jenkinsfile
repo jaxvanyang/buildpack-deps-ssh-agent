@@ -19,7 +19,7 @@ pipeline {
 				axes {
 					axis {
 						name 'TAG'
-						values 'amd64-sid', 'riscv64-sid'
+						values 'amd64-sid', 'riscv64-sid', 'arm64v8-sid'
 					}
 				}
 				stages {
