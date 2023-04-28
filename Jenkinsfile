@@ -1,8 +1,11 @@
 pipeline {
+	options {
+		disableConcurrentBuilds()
+		buildDiscarder logRotator(artifactDaysToKeepStr: '', artifactNumToKeepStr: '', daysToKeepStr: '30', numToKeepStr: '')
+	}
 	agent {
 		label 'built-in'
 	}
-
 	stages {
 		stage('Clean Old Build') {
 			steps {
