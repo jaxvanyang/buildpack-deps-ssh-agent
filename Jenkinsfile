@@ -14,7 +14,7 @@ pipeline {
 				sh 'make pull'
 			}
 		}
-		stage('Matrix') {
+		stage('Deploy Matrix') {
 			matrix {
 				axes {
 					axis {
