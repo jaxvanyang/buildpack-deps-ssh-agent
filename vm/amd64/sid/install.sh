@@ -10,7 +10,7 @@ set -e
 # require manual domain entry during the install.
 DOMAIN="${1}.local"
 DIST_URL="https://mirrors.tuna.tsinghua.edu.cn/debian/dists/sid/main/installer-amd64"
-LINUX_VARIANT="debian11"
+LINUX_VARIANT="debiantesting"
 
 help_msg() {
 	cat <<EOF
