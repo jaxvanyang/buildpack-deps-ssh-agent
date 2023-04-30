@@ -42,30 +42,30 @@ pipeline {
 				}
 			}
 		}
-		stage('VM Deploy Matrix') {
-			matrix {
-				axes {
-					axis {
-						name 'TAG'
-						values 'amd64-sid', 'arm64v8-sid'
-					}
-				}
-				stages {
-					stage('Deploy') {
-						steps {
-							echo "Deploy ${TAG}-vm"
-							sh 'make ${TAG}-vm'
-						}
-					}
-					stage('Test') {
-						steps {
-							echo "Test ${TAG}-vm"
-							sh 'virsh desc ${TAG}-vm'
-						}
-					}
-				}
-			}
-		}
+		// stage('VM Deploy Matrix') {
+		// 	matrix {
+		// 		axes {
+		// 			axis {
+		// 				name 'TAG'
+		// 				values 'amd64-sid', 'arm64v8-sid'
+		// 			}
+		// 		}
+		// 		stages {
+		// 			stage('Deploy') {
+		// 				steps {
+		// 					echo "Deploy ${TAG}-vm"
+		// 					sh 'make ${TAG}-vm'
+		// 				}
+		// 			}
+		// 			stage('Test') {
+		// 				steps {
+		// 					echo "Test ${TAG}-vm"
+		// 					sh 'virsh desc ${TAG}-vm'
+		// 				}
+		// 			}
+		// 		}
+		// 	}
+		// }
 	}
 }
 
