@@ -72,5 +72,5 @@ clean-agents: stop
 clean-vms:
 	-@for vm in ${VMS}; do $(call vm_clean,$${vm}); done
 
-clean: clean-agents clean-vms
+clean: clean-agents
 	-@for tag in ${TAGS}; do docker rmi "${HUB_PREFIX}/${NAME}:$${tag}"; done
