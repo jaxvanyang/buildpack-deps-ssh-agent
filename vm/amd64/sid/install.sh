@@ -51,7 +51,7 @@ EOF
 }
 
 main() {
-	if [ $# -ne 2 ]; then
+	if [ $# -ne 2 ] || [ -z "${2}" ]; then
 		help_msg >&2
 		exit 1
 	fi
