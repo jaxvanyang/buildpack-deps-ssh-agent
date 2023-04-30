@@ -41,3 +41,6 @@ Docker images & VMs for Jenkins agents connected over SSH, based on buildpack-de
 - [Virtual Machine Manager](https://virt-manager.org/index.html)
 - [libvirt - ArchWiki](https://wiki.archlinux.org/title/Libvirt)
 - [pin/debian-vm-install: Debian unattended VM installation with virt-install and pressed.cfg](https://github.com/pin/debian-vm-install)
+- [DebianInstaller/Preseed - Debian Wiki](https://wiki.debian.org/DebianInstaller/Preseed)
+- [debian.org/releases/testing/example-preseed.txt](https://www.debian.org/releases/testing/example-preseed.txt)
+- [Index of /debian/dists/sid/ | 清华大学开源软件镜像站 | Tsinghua Open Source Mirror](https://mirrors.tuna.tsinghua.edu.cn/debian/dists/sid/)
