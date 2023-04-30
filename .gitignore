@@ -1,2 +1,4 @@
 # ignore SSH public key file
 *.pub
+# ignore temporary authorized_keys used by VM installation scripts
+vm/**/authorized_keys
