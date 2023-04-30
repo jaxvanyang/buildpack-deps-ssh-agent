@@ -3,7 +3,9 @@ NAME := buildpack-deps-ssh-agent
 TAGS := sid-amd64 sid-riscv64 sid-arm64v8
 IMAGES := amd64-sid riscv64-sid arm64v8-sid
 AGENTS := amd64-sid-agent riscv64-sid-agent arm64v8-sid-agent
+VMS := amd64-sid-vm arm64v8-sid-vm
 COMMON_DEPS := setup-sshd
+VM_DEPS := install.sh preseed.cfg postinst.sh
 
 ## Macros
 docker_build = cp ${COMMON_DEPS} "$(1)/$(2)" && cd "$(1)/$(2)" && \
@@ -17,11 +19,17 @@ docker_run = docker run -d \
 						 --restart unless-stopped \
 						 "${HUB_PREFIX}/${NAME}:$(3)" \
 						 "$${JENKINS_AGENT_SSH_PUBKEY}"
+vm_install = cd "vm/$(1)/$(2)" && \
+						 ./install.sh "$(1)-$(2)-vm" "$${JENKINS_AGENT_SSH_PUBKEY}"
+vm_clean = virsh destroy "${1}"; \
+					 virsh undefine "${1}" --remove-all-storage --nvram
 
-.PHONY: build push pull test stop clean-agents clean
-.PHONY: ${IMAGES} ${AGENTS}
+.PHONY: build push pull test stop clean-agents clean-vms clean
+.PHONY: ${IMAGES} ${AGENTS} ${VMS}
 
 build: ${IMAGES}
+
+vm-install: ${VMS}
 
 amd64-sid: amd64/sid/Dockerfile ${COMMON_DEPS}
 	$(call docker_build,amd64,sid)
@@ -41,6 +49,12 @@ arm64v8-sid: arm64v8/sid/Dockerfile ${COMMON_DEPS}
 arm64v8-sid-agent:
 	$(call docker_run,$@,2202,sid-arm64v8)
 
+amd64-sid-vm: $(patsubst %,vm/amd64/sid/%,${VM_DEPS})
+	$(call vm_install,amd64,sid)
+
+arm64v8-sid-vm: $(patsubst %,vm/arm64v8/sid/%,${VM_DEPS})
+	$(call vm_install,arm64v8,sid)
+
 push:
 	for tag in ${TAGS}; do docker push "${HUB_PREFIX}/${NAME}:$${tag}"; done
 
@@ -55,5 +69,8 @@ stop:
 clean-agents: stop
 	-docker rm ${AGENTS}
 
-clean: clean-agents
+clean-vms:
+	-@for vm in ${VMS}; do $(call vm_clean,$${vm}); done
+
+clean: clean-agents clean-vms
 	-@for tag in ${TAGS}; do docker rmi "${HUB_PREFIX}/${NAME}:$${tag}"; done
