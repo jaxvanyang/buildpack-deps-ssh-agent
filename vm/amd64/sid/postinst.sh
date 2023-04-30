@@ -61,6 +61,10 @@ sid_packages=(
 	xz-utils
 	zlib1g-dev
 )
+# other needed packages
+packages=(
+	openjdk-17-jdk-headless
+)
 
 # Create a user for Jenkins
 user=jenkins
@@ -101,5 +105,6 @@ update-grub
 apt-get install -y --no-install-recommends \
 	"${sid_curl_packages[@]}" \
 	"${sid_scm_packages[@]}" \
-	"${sid_packages[@]}"
+	"${sid_packages[@]}" \
+	"${packages[@]}"
 rm -rf /var/lib/apt/lists/*
