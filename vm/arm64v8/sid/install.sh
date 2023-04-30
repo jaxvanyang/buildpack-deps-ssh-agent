@@ -46,6 +46,7 @@ EOF
 		--virt-type=qemu \
 		--graphics none \
 		--autoconsole none \
+		--wait \
 		--network default \
 		--extra-args="auto=true hostname="${1}" domain="${DOMAIN}" console=tty0 console=ttyS0,115200n8 serial"
 }
