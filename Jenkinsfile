@@ -12,11 +12,12 @@ pipeline {
 				sh 'make clean'
 			}
 		}
-		stage('Pull Images') {
-			steps {
-				sh 'make pull'
-			}
-		}
+		// Images are not changed for a long time
+		// stage('Pull Images') {
+		// 	steps {
+		// 		sh 'make pull'
+		// 	}
+		// }
 		stage('Docker Deploy Matrix') {
 			matrix {
 				axes {
