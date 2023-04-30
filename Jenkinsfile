@@ -7,9 +7,9 @@ pipeline {
 		label 'built-in'
 	}
 	stages {
-		stage('Clean Old Build') {
+		stage('Clean Agents') {
 			steps {
-				sh 'make clean'
+				sh 'make clean-agents'
 			}
 		}
 		// Images are not changed for a long time
