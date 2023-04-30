@@ -8,22 +8,28 @@ Docker images & VMs for Jenkins agents connected over SSH, based on buildpack-de
   See [buildpack-deps - Official Image | Docker Hub](https://hub.docker.com/_/buildpack-deps).
 
 - About ssh-agent:
-  See [jenkins/ssh-agent - Docker Image | Docker Hub](https://hub.docker.com/r/jenkins/ssh-agent)
+  See [jenkins/ssh-agent - Docker Image | Docker Hub](https://hub.docker.com/r/jenkins/ssh-agent).
 
 - Folder structure:
-  - For Docker container: `arch/code_name/Dockerfile`
+  - For Docker container: `<arch>/<code_name>/Dockerfile`.
+  - For VM: `vm/<arch>/<code_name>/`.
   - Example:
     ```bash
     .
     ├── amd64
-    │   └── sid
-    │       └── Dockerfile
+    │   └── sid
+    │       └── Dockerfile
     ├── arm64v8
-    │   └── sid
-    │       └── Dockerfile
-    └── riscv64
-        └── sid
-            └── Dockerfile
+    │   └── sid
+    │       └── Dockerfile
+    ├── riscv64
+    │   └── sid
+    │       └── Dockerfile
+    └── vm
+        └── amd64
+            └── sid
+                ├── install.sh
+                └── preseed.cfg
     ```
 
 - Usage: See [Makefile](Makefile)
