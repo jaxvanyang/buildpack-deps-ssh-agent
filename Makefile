@@ -3,7 +3,7 @@ NAME := buildpack-deps-ssh-agent
 TAGS := sid-amd64 sid-riscv64 sid-arm64v8
 IMAGES := amd64-sid riscv64-sid arm64v8-sid
 AGENTS := amd64-sid-agent riscv64-sid-agent arm64v8-sid-agent
-VMS := amd64-sid-vm arm64v8-sid-vm
+VMS := amd64-sid-vm arm64v8-sid-vm riscv64-sid-vm
 COMMON_DEPS := setup-sshd
 VM_DEPS := install.sh preseed.cfg postinst.sh
 
@@ -55,6 +55,9 @@ amd64-sid-vm: $(patsubst %,vm/amd64/sid/%,${VM_DEPS})
 arm64v8-sid-vm: $(patsubst %,vm/arm64v8/sid/%,${VM_DEPS})
 	$(call vm_install,arm64v8,sid)
 
+riscv64-sid-vm:
+	make -C vm/riscv64/sid install
+
 push:
 	for tag in ${TAGS}; do docker push "${HUB_PREFIX}/${NAME}:$${tag}"; done
 
@@ -71,6 +74,8 @@ clean-agents: stop
 
 clean-vms:
 	-@for vm in ${VMS}; do $(call vm_clean,$${vm}); done
+	-make -C vm/riscv64/sid clean-vm
 
 clean: clean-agents
 	-@for tag in ${TAGS}; do docker rmi "${HUB_PREFIX}/${NAME}:$${tag}"; done
+	-make -C vm/riscv64/sid clean
