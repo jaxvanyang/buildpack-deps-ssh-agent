@@ -61,6 +61,7 @@ main() {
 	echo "${2}" > authorized_keys
 
 	install_debian_sid "${1}"
+	rm authorized_keys
 }
 
 main "$@"
