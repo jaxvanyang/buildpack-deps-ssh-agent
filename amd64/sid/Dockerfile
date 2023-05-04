@@ -7,10 +7,10 @@ FROM eclipse-temurin:17.0.5_8-jdk-focal as jre-build
 # for now we include the full module path to maintain compatibility
 # while still saving space
 RUN jlink \
-         --add-modules ALL-MODULE-PATH \
-         --no-man-pages \
-         --compress=2 \
-         --output /javaruntime
+				--add-modules ALL-MODULE-PATH \
+				--no-man-pages \
+				--compress=2 \
+				--output /javaruntime
 
 FROM buildpack-deps:sid
 
@@ -26,11 +26,11 @@ ARG AGENT_WORKDIR="${JENKINS_AGENT_HOME}/agent"
 ENV AGENT_WORKDIR=${AGENT_WORKDIR}
 
 RUN groupadd -g ${gid} ${group} \
-    && useradd -d "${JENKINS_AGENT_HOME}" -u "${uid}" -g "${gid}" -m -s /bin/bash "${user}" \
-    # Prepare subdirectories
-    && mkdir -p "${JENKINS_AGENT_HOME}/.ssh/" "${AGENT_WORKDIR}" "${JENKINS_AGENT_HOME}/.jenkins" \
-    # Make sure that user 'jenkins' own these directories and their content
-    && chown -R "${uid}":"${gid}" "${JENKINS_AGENT_HOME}" "${AGENT_WORKDIR}"
+		&& useradd -d "${JENKINS_AGENT_HOME}" -u "${uid}" -g "${gid}" -m -s /bin/bash "${user}" \
+		# Prepare subdirectories
+		&& mkdir -p "${JENKINS_AGENT_HOME}/.ssh/" "${AGENT_WORKDIR}" "${JENKINS_AGENT_HOME}/.jenkins" \
+		# Make sure that user 'jenkins' own these directories and their content
+		&& chown -R "${uid}":"${gid}" "${JENKINS_AGENT_HOME}" "${AGENT_WORKDIR}"
 
 # Use mirror to speed up apt
 RUN <<EOF cat > /etc/apt/sources.list
@@ -49,12 +49,12 @@ RUN apt-get update \
 
 # setup SSH server
 RUN sed -i /etc/ssh/sshd_config \
-        -e 's/#PermitRootLogin.*/PermitRootLogin no/' \
-        -e 's/#RSAAuthentication.*/RSAAuthentication yes/'  \
-        -e 's/#PasswordAuthentication.*/PasswordAuthentication no/' \
-        -e 's/#SyslogFacility.*/SyslogFacility AUTH/' \
-        -e 's/#LogLevel.*/LogLevel INFO/' && \
-    mkdir /var/run/sshd
+				-e 's/#PermitRootLogin.*/PermitRootLogin no/' \
+				-e 's/#RSAAuthentication.*/RSAAuthentication yes/' \
+				-e 's/#PasswordAuthentication.*/PasswordAuthentication no/' \
+				-e 's/#SyslogFacility.*/SyslogFacility AUTH/' \
+				-e 's/#LogLevel.*/LogLevel INFO/' && \
+		mkdir /var/run/sshd
 
 # VOLUME directive must happen after setting up permissions and content
 VOLUME "${AGENT_WORKDIR}" "${JENKINS_AGENT_HOME}"/.jenkins "/tmp" "/run" "/var/run"
@@ -74,9 +74,9 @@ EXPOSE 22
 ENTRYPOINT ["setup-sshd"]
 
 # LABEL \
-#     org.opencontainers.image.vendor="Jenkins project" \
-#     org.opencontainers.image.title="Official Jenkins SSH Agent Docker image" \
-#     org.opencontainers.image.description="A Jenkins agent image which allows using SSH to establish the connection" \
-#     org.opencontainers.image.url="https://www.jenkins.io/" \
-#     org.opencontainers.image.source="https://github.com/jenkinsci/docker-ssh-agent" \
-#     org.opencontainers.image.licenses="MIT"
+#		org.opencontainers.image.vendor="Jenkins project" \
+#		org.opencontainers.image.title="Official Jenkins SSH Agent Docker image" \
+#		org.opencontainers.image.description="A Jenkins agent image which allows using SSH to establish the connection" \
+#		org.opencontainers.image.url="https://www.jenkins.io/" \
+#		org.opencontainers.image.source="https://github.com/jenkinsci/docker-ssh-agent" \
+#		org.opencontainers.image.licenses="MIT"
