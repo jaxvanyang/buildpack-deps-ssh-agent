@@ -24,12 +24,15 @@ vm_install = cd "vm/$(1)/$(2)" && \
 vm_clean = virsh destroy "${1}"; \
 					 virsh undefine "${1}" --remove-all-storage --nvram
 
-.PHONY: build push pull test stop clean-agents clean-vms clean
+.PHONY: build push pull test stop clean-agents agents clean
+.PHONY: install-vms clean-vms
 .PHONY: ${IMAGES} ${AGENTS} ${VMS}
+
+agents: ${AGENTS}
 
 build: ${IMAGES}
 
-vm-install: ${VMS}
+install-vms: ${VMS}
 
 amd64-sid: amd64/sid/Dockerfile ${COMMON_DEPS}
 	$(call docker_build,amd64,sid)
