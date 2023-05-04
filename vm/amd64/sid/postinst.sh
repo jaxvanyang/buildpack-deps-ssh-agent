@@ -64,6 +64,10 @@ sid_packages=(
 # other needed packages
 packages=(
 	openjdk-17-jdk-headless
+	dejagnu
+	libgmp-dev
+	libmpfr-dev
+	libmpc-dev
 )
 
 # Create a user for Jenkins

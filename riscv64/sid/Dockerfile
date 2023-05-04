@@ -44,13 +44,17 @@ deb https://mirrors.aliyun.com/debian-ports/ unreleased main
 EOF
 
 RUN apt-get update \
-    && apt-get install --no-install-recommends -y \
-       git-lfs \
-       less \
-       netcat-traditional \
-       openssh-server \
-       patch \
-    && rm -rf /var/lib/apt/lists/*
+		&& apt-get install --no-install-recommends -y \
+			git-lfs \
+			less \
+			netcat-traditional \
+			openssh-server \
+			patch \
+			dejagnu \
+			libgmp-dev \
+			libmpfr-dev \
+			libmpc-dev \
+		&& rm -rf /var/lib/apt/lists/*
 
 # setup SSH server
 RUN sed -i /etc/ssh/sshd_config \

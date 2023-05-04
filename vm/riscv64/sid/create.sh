@@ -138,6 +138,10 @@ sid_packages=(
 # other needed packages
 packages=(
 	openjdk-17-jdk-headless
+	dejagnu
+	libgmp-dev
+	libmpfr-dev
+	libmpc-dev
 )
 
 if [ "$SYSTEM" == "riscv64-virt" ]; then
