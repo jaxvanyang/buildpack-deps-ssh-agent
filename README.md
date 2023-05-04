@@ -4,6 +4,9 @@ Docker images & VMs for Jenkins agents connected over SSH, based on buildpack-de
 
 ## About this project
 
+- What is this for?
+  See [jaxvanyang/jenkins-bench: Self-use benchmarks for Jenkins.](https://github.com/jaxvanyang/jenkins-bench)
+
 - About buildpack-deps:
   See [buildpack-deps - Official Image | Docker Hub](https://hub.docker.com/_/buildpack-deps).
 
