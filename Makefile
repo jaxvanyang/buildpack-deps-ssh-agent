@@ -25,7 +25,7 @@ vm_clean = virsh destroy "${1}"; \
 					 virsh undefine "${1}" --remove-all-storage --nvram
 
 .PHONY: build push pull test stop clean-agents agents clean
-.PHONY: install-vms clean-vms
+.PHONY: clean-vms vm-install start-vms
 .PHONY: ${IMAGES} ${AGENTS} ${VMS}
 
 agents: ${AGENTS}
@@ -33,6 +33,9 @@ agents: ${AGENTS}
 build: ${IMAGES}
 
 install-vms: ${VMS}
+
+start-vms:
+	for vm in ${VMS}; do virsh start $${vm}; done
 
 amd64-sid: amd64/sid/Dockerfile ${COMMON_DEPS}
 	$(call docker_build,amd64,sid)
