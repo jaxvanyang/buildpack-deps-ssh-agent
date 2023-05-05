@@ -142,6 +142,8 @@ packages=(
 	libgmp-dev
 	libmpfr-dev
 	libmpc-dev
+	flex
+	bison
 )
 
 if [ "$SYSTEM" == "riscv64-virt" ]; then

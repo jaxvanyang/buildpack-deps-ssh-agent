@@ -68,6 +68,8 @@ packages=(
 	libgmp-dev
 	libmpfr-dev
 	libmpc-dev
+	flex
+	bison
 )
 
 # Create a user for Jenkins
