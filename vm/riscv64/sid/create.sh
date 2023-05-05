@@ -146,6 +146,15 @@ packages=(
 	bison
 	bc
 	libelf-dev
+	zip
+	libx11-dev
+	libxext-dev
+	libxrender-dev
+	libxrandr-dev
+	libxtst-dev
+	libxt-dev
+	libcups2-dev
+	libasound2-dev
 )
 
 if [ "$SYSTEM" == "riscv64-virt" ]; then

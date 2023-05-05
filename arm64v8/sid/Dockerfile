@@ -53,6 +53,15 @@ RUN apt-get update \
 			bison \
 			bc \
 			libelf-dev \
+			zip \
+			libx11-dev \
+			libxext-dev \
+			libxrender-dev \
+			libxrandr-dev \
+			libxtst-dev \
+			libxt-dev \
+			libcups2-dev \
+			libasound2-dev \
 		&& rm -rf /var/lib/apt/lists/*
 
 # setup SSH server
