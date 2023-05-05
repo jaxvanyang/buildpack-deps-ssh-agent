@@ -155,6 +155,7 @@ packages=(
 	libxt-dev
 	libcups2-dev
 	libasound2-dev
+	ant
 )
 
 if [ "$SYSTEM" == "riscv64-virt" ]; then

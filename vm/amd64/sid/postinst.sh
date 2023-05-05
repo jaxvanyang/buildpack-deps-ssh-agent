@@ -81,6 +81,7 @@ packages=(
 	libxt-dev
 	libcups2-dev
 	libasound2-dev
+	ant
 )
 
 # Create a user for Jenkins

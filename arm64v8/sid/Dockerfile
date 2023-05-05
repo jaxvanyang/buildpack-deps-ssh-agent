@@ -62,6 +62,7 @@ RUN apt-get update \
 			libxt-dev \
 			libcups2-dev \
 			libasound2-dev \
+			ant \
 		&& rm -rf /var/lib/apt/lists/*
 
 # setup SSH server
