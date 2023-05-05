@@ -56,6 +56,8 @@ RUN apt-get update \
 			libmpc-dev \
 			flex \
 			bison \
+			bc \
+			libelf-dev \
 		&& rm -rf /var/lib/apt/lists/*
 
 # setup SSH server

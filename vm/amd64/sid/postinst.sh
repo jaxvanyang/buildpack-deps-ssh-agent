@@ -70,6 +70,8 @@ packages=(
 	libmpc-dev
 	flex
 	bison
+	bc
+	libelf-dev
 )
 
 # Create a user for Jenkins
