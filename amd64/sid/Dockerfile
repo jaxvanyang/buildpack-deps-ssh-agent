@@ -49,6 +49,8 @@ RUN apt-get update \
 			libgmp-dev \
 			libmpfr-dev \
 			libmpc-dev \
+			flex \
+			bison \
 		&& rm -rf /var/lib/apt/lists/*
 
 # setup SSH server
