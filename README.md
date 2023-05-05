@@ -42,7 +42,7 @@ Docker images & VMs for Jenkins agents connected over SSH, based on buildpack-de
     ```
   - Build & run VMs:
     ```bash
-    JENKINS_AGENT_SSH_PUBKEY="XX" make clean-vms vm-install
+    JENKINS_AGENT_SSH_PUBKEY="XX" make clean-vms install-vms
     ```
 
 ## References

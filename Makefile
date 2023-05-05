@@ -25,7 +25,7 @@ vm_clean = virsh destroy "${1}"; \
 					 virsh undefine "${1}" --remove-all-storage --nvram
 
 .PHONY: build push pull test stop clean-agents agents clean
-.PHONY: clean-vms vm-install start-vms
+.PHONY: clean-vms install-vms start-vms
 .PHONY: ${IMAGES} ${AGENTS} ${VMS}
 
 agents: ${AGENTS}
