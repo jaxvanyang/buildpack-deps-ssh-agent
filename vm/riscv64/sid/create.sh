@@ -144,6 +144,8 @@ packages=(
 	libmpc-dev
 	flex
 	bison
+	bc
+	libelf-dev
 )
 
 if [ "$SYSTEM" == "riscv64-virt" ]; then
