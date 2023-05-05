@@ -35,7 +35,15 @@ Docker images & VMs for Jenkins agents connected over SSH, based on buildpack-de
                 └── preseed.cfg
     ```
 
-- Usage: See [Makefile](Makefile)
+- Usage: For details, see [Makefile](Makefile)
+  - Build & run Docker containers:
+    ```bash
+    JENKINS_AGENT_SSH_PUBKEY="XX" make clean build agents
+    ```
+  - Build & run VMs:
+    ```bash
+    JENKINS_AGENT_SSH_PUBKEY="XX" make clean-vms vm-install
+    ```
 
 ## References
 
