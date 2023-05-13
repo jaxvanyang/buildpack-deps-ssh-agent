@@ -37,7 +37,7 @@ EOF
 		--name="${1}" \
 		--memory 1024 \
 		--vcpus 2 \
-		--disk path="/mnt/images/${1}.qcow2",size=16,bus=virtio,cache=none \
+		--disk path="/mnt/images/${1}.qcow2",size=32,bus=virtio,cache=none \
 		--initrd-inject=preseed.cfg \
 		--initrd-inject=postinst.sh \
 		--initrd-inject=authorized_keys \

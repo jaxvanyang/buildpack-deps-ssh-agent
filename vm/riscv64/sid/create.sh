@@ -51,7 +51,7 @@ if [ -z "$MEM" ]; then
 fi
 
 if [ -z "$IMAGE_SIZE" ]; then
-	IMAGE_SIZE="16G"
+	IMAGE_SIZE="32G"
 fi
 
 if [ -z "$SUITE" ]; then
