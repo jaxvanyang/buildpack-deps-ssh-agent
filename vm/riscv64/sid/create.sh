@@ -199,7 +199,7 @@ fi
 set -v
 
 # Create the image
-mkdir "${DIR}"
+mkdir -p "${DIR}"
 qemu-img create -f qcow2 "${QEMU_IMG}" "${IMAGE_SIZE}"
 modprobe nbd max_part=16
 qemu-nbd -c /dev/nbd0 "${QEMU_IMG}"
