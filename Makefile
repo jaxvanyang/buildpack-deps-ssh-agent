@@ -13,7 +13,6 @@ docker_build = cp ${COMMON_DEPS} "$(1)/$(2)" && cd "$(1)/$(2)" && \
 							 rm ${COMMON_DEPS}
 docker_run = docker run -d \
 						 -v "$(1)-workdir:/home/jenkins/agent:rw" \
-						 -v "/mnt/resources:/mnt/resources:ro" \
 						 -p "$(2):22" \
 						 --name "$(1)" \
 						 --restart unless-stopped \
