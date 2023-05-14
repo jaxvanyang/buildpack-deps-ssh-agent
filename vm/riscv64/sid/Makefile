@@ -11,7 +11,7 @@ POOL_IMG := ${POOL_DIR}/${IMG_NAME}
 install: ${POOL_IMG} install.sh
 	./install.sh "${HOSTNAME}"
 
-${POOL_DIR}/${HOSTNAME}.qcow2: ${QEMU_IMG}
+${POOL_IMG}: ${QEMU_IMG}
 	cp $^ $@
 
 build: ${QEMU_IMG}
