@@ -1,3 +1,4 @@
+DIR ?= riscv64-virt
 HOSTNAME ?= riscv64-sid-vm
 IP ?= 192.168.122.30
 IMG_NAME := ${HOSTNAME}.qcow2
@@ -16,7 +17,7 @@ ${POOL_DIR}/${HOSTNAME}.qcow2: ${QEMU_IMG}
 build: ${QEMU_IMG}
 
 ${QEMU_IMG}: create.sh
-	sudo DIR="$${DIR}" \
+	sudo DIR="${DIR}" \
 		HOSTNAME="${HOSTNAME}" \
 		IP="${IP}" \
 		JENKINS_AGENT_SSH_PUBKEY="$${JENKINS_AGENT_SSH_PUBKEY}" \
