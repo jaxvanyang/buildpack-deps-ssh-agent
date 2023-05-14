@@ -67,7 +67,9 @@ if [ -z "$MIRROR2" ]; then
 fi
 
 if [ -z "${DIR}" ]; then
-	DIR="$(mktemp -d "/tmp/${SYSTEM}-XXXXXXX")"
+	# DIR="$(mktemp -d /tmp/$SYSTEM-XXXXXXX)"
+	DIR="$SYSTEM"
+	mkdir -p "${DIR}"
 fi
 QEMU_IMG="${DIR}/${HOSTNAME}.qcow2"
 
@@ -197,7 +199,7 @@ fi
 set -v
 
 # Create the image
-mkdir -p "${DIR}"
+mkdir "${DIR}"
 qemu-img create -f qcow2 "${QEMU_IMG}" "${IMAGE_SIZE}"
 modprobe nbd max_part=16
 qemu-nbd -c /dev/nbd0 "${QEMU_IMG}"
