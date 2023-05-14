@@ -116,6 +116,10 @@ chown -R "${uid}":"${gid}" "${JENKINS_AGENT_HOME}/.ssh"
 sed -i 's/TIMEOUT=5/TIMEOUT=0/g' /etc/default/grub
 update-grub
 
+# Setup APT
+sed -i 's/^deb-src/# deb-src/' /etc/apt/sources.list
+apt-get update
+
 # Remove some non-essential packages.
 # DEBIAN_FRONTEND=noninteractive apt-get purge -y nano laptop-detect tasksel dictionaries-common emacsen-common iamerican ibritish ienglish-common ispell
 
