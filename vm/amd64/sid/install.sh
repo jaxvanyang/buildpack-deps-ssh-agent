@@ -9,7 +9,8 @@ set -e
 # Domain is necessary in order to avoid debian installer to
 # require manual domain entry during the install.
 DOMAIN="${1}.local"
-DIST_URL="https://mirrors.tuna.tsinghua.edu.cn/debian/dists/sid/main/installer-amd64"
+# DIST_URL="https://mirrors.ustc.edu.cn/debian/dists/sid/main/installer-amd64"
+DIST_URL="https://d-i.debian.org/daily-images/amd64/daily/netboot/debian-installer/amd64/,kernel=linux,initrd=initrd.gz"
 LINUX_VARIANT="debiantesting"
 
 help_msg() {
